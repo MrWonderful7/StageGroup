@@ -1,18 +1,22 @@
 package Database;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDateTime;  
 
-
+import model.Type;
 import model.User;
 
 
@@ -43,13 +47,17 @@ public class CrudDaoUser implements UserDao{
 		while(resultSet.next()) {
 			
 			
+			
+			
 			String name = resultSet.getString("name");
 			String surname = resultSet.getString("surname");
 			Date birthDate = resultSet.getDate("birthDate");
 			int age = resultSet.getInt("age");
-			String roles = resultSet.getString("roles");
+			String type = resultSet.getString("role");
+			Type role = Type.valueOf(type);
 			
-			User user = new User(name, surname, birthDate, age, roles);
+			 
+			User user = new User(name, surname, birthDate, age, role);
 			listProducts.add(user);
 		}
 		
@@ -58,26 +66,33 @@ public class CrudDaoUser implements UserDao{
 	}
 
 	@Override
-	public boolean save(User user) throws SQLException {
+	public boolean save(User user) throws SQLException, ParseException {
 		
-		String sql = "INSERT into users (name, surname, birthDate, age, roles)VALUES(?,?,?,?,?)";
+		String sql = "INSERT into users (firstname, lastname, birthDate, age, role, info)VALUES(?,?,?,?,?,?)";
 		boolean rowInserted = false;
 		Connection conn = DbConnect.getInstance().getConnection();
 			PreparedStatement stm = conn.prepareStatement(sql);
+			
+			
+			Date date = new Date();
+			date.getTime();
+			String formattedDate = new SimpleDateFormat("yyyyMMdd").format(date);
+			Timestamp timestamp = new Timestamp(new SimpleDateFormat("yyyyMMdd").parse(formattedDate).getTime());
 			
 			java.util.Date utilDate = user.getBirthDate();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			final String stringDate= dateFormat.format(utilDate);
 			final java.sql.Date sqlDate=  java.sql.Date.valueOf(stringDate);
+			final String role =  String.valueOf(user.getType());
 			
-		
 			
 			
 			stm.setString(1, user.getName());
 			stm.setString(2, user.getSurname());
 			stm.setDate(3, sqlDate);  
 			stm.setInt(4, user.getAge());
-			stm.setString(5, user.getRoles());
+			stm.setString(5, role);
+			stm.setString(6, formattedDate);
 			
 			rowInserted = stm.executeUpdate() > 0;
 			
@@ -110,7 +125,8 @@ public class CrudDaoUser implements UserDao{
 			roles = resultSet.getString("roles");
 		}
 		Date date = null;
-		return Optional.of(new User(idd, name, date,surname, age, roles));
+	//	return Optional.of(new User(idd, name, date,surname, age, role));
+		return null;
 	}
 
 	@Override

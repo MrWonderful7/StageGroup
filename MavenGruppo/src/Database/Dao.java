@@ -1,6 +1,7 @@
 package Database;
 
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +11,7 @@ Optional<T> find(ID id) throws SQLException;
 	
 	List<T> findAll() throws SQLException;
 	
-	boolean save(T o) throws SQLException;
+	boolean save(T o) throws SQLException, ParseException;
 	
 	boolean update(T o) throws SQLException;
 	

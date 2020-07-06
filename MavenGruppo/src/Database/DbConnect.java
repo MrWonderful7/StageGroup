@@ -11,8 +11,8 @@ public class DbConnect {
 	  
 	    private Connection connection;
 	    private String url = "jdbc:oracle:thin:@localhost:1521:xe";
-	    private String username = "Jo";
-	    private String password = "admin123";
+	    private String username = "LORENZO";
+	    private String password = "0000";
 
 	  private  DbConnect() throws SQLException {
 	        try {

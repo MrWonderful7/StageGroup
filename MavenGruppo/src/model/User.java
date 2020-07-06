@@ -1,4 +1,5 @@
 package model;
+import java.security.Timestamp;
 import java.util.Date;
 
 
@@ -7,42 +8,36 @@ public class User {
 	String name;
 	String surname;
 	Date birthDate;
+	Timestamp CreationTimestamp;
 	int age;
 	int id;
-	String roles;
+	Type type;
 	
-	public User(int id, String name, Date birthDate,String surname, int age, String roles) {
+	public User(int id, String name, Date birthDate,String surname, int age, Type type, Timestamp CreationTimestamp) {
 		this.id = id;
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
 		this.age = age;
+		this.type = type;
+		this.CreationTimestamp=CreationTimestamp;
 		
-		this.roles = roles;
 	}
 
-	public User(String name, String surname, Date birthDate, int age, String roles) {
+
+	public User(String name, String surname, Date birthDate, int age,  Type type) {
 		
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
 		this.age = age;
-		this.roles = roles;
+		this.type = type;
 	}
 
 public User() {}
 
 
-	public String getRoles() {
-		return roles;
-	}
-
-
-	public void setRoles(String roles) {
-		this.roles = roles;
-	}
-
-
+	
 	public User(int id) {
 		this.id = id;
 	}
@@ -88,6 +83,20 @@ public User() {}
 		this.id = id;
 	}
 
-	
+	public Timestamp getCreationTimestamp() {
+		return CreationTimestamp;
+	}
+
+	public void setCreationTimestamp(Timestamp creationTimestamp) {
+		CreationTimestamp = creationTimestamp;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
 	
 }

@@ -6,7 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Optional;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -14,9 +13,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import Database.CrudDaoUser;
-
+import model.Type;
 import model.User;
 
 /**
@@ -87,11 +85,12 @@ public class ControllerServ extends HttpServlet {
 					String birthDate = request.getParameter("birthDate");
 					int age =  Integer.parseInt(request.getParameter("age"));
 					String roles = request.getParameter("roles");
+					Type type = Type.valueOf(roles);
 					
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					Date date = sdf.parse(birthDate);
 					
-					User newUser = new User(name, surname, date, age, roles);
+					User newUser = new User(name, surname, date, age, type);
 					daoUser.save(newUser);
 					
 					forward(request,response,"/home.jsp");
