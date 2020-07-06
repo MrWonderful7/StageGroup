@@ -36,7 +36,7 @@ public class CrudDaoUser implements UserDao{
 	public List<User> findAll() throws SQLException {
 		
 		List<User> listProducts = new ArrayList<>();
-		String sql = "SELECT id,name,surname,birthDate,age,roles FROM users";
+		String sql = "SELECT id,firstname,lastname,birthDate,age,role FROM users";
 	
 		
 		Connection conn = DbConnect.getInstance().getConnection();

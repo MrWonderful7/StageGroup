@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -13,6 +15,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.google.gson.Gson;
+
 import Database.CrudDaoUser;
 import model.Type;
 import model.User;
@@ -75,6 +84,36 @@ public class ControllerServ extends HttpServlet {
 //					existingProduct.ifPresent(s -> request.setAttribute("product", s));
 					disp.forward(request, response);
 				}
+			 
+			 
+
+			 public JSONObject getJson(String id) throws SQLException, ParseException {
+					
+				 
+					List<User> list = new ArrayList();
+					list = daoUser.findAll();
+					
+					String jsonn = new Gson().toJson(list);
+					try{
+						 JSONArray array = new JSONArray(jsonn);
+						 for(int i = 0; i < array.length();i++) {	 
+							 JSONObject obj = array.optJSONObject(i);
+							 if(obj.has("id")) {
+								  int idInt = obj.getInt("id");
+								  String str2 = Integer.toString(idInt);
+								  	if(str2.equalsIgnoreCase(id)){
+									  return obj;
+								  }	
+							 }
+						 }
+					}catch(JSONException e){
+						e.printStackTrace();
+						}
+					return null;
+					}
+			 
+			 
+			 
 			 
 			 private void insertProduct(HttpServletRequest request, HttpServletResponse response)
 						throws SQLException, IOException, ServletException, ParseException{
