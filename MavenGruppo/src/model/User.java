@@ -1,5 +1,6 @@
 package model;
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 import java.util.Date;
 
 
@@ -13,6 +14,21 @@ public class User {
 	int id;
 	Type type;
 	
+	
+	
+	
+	public User(String name, String surname, Date birthDate, Timestamp creationTimestamp, int age, int id, Type type) {
+		
+		this.name = name;
+		this.surname = surname;
+		this.birthDate = birthDate;
+		CreationTimestamp = creationTimestamp;
+		this.age = age;
+		this.id = id;
+		this.type = type;
+	}
+
+
 	public User(int id, String name, Date birthDate,String surname, int age, Type type, Timestamp CreationTimestamp) {
 		this.id = id;
 		this.name = name;
@@ -25,13 +41,14 @@ public class User {
 	}
 
 
-	public User(String name, String surname, Date birthDate, int age,  Type type) {
+	public User(String name, String surname, Date birthDate, int age,  Type type,Timestamp CreationTimestamp) {
 		
 		this.name = name;
 		this.surname = surname;
 		this.birthDate = birthDate;
 		this.age = age;
 		this.type = type;
+		this.CreationTimestamp=CreationTimestamp;
 	}
 
 public User() {}

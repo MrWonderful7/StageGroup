@@ -1,12 +1,16 @@
 package Controller;
 
+import java.awt.RenderingHints.Key;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -19,8 +23,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import Database.CrudDaoUser;
 import model.Type;
@@ -79,6 +86,8 @@ public class ControllerServ extends HttpServlet {
 			 private void showEditForm(HttpServletRequest request, HttpServletResponse response) 
 						throws SQLException, IOException, ServletException{
 					String id = request.getParameter("opp");
+					
+				
 					Optional<User> existingProduct = daoUser.find(id);
 					RequestDispatcher disp = request.getRequestDispatcher("/UserForm.jsp");
 //					existingProduct.ifPresent(s -> request.setAttribute("product", s));
@@ -86,8 +95,27 @@ public class ControllerServ extends HttpServlet {
 				}
 			 
 			 
+			 public JSONObject getJson(String id) throws SQLException, JSONException, org.json.simple.parser.ParseException {
+				 
+		 
+				Optional<User> list = Optional.empty();
+				list =  daoUser.find(id);
+				
+				String jsonn = new Gson().toJson(list);
+				
+				
+				JsonObject jsonObject= null;
+				jsonObject = new JsonParser().parse(jsonn).getAsJsonObject();
+				JSONObject JSONObject = new JSONObject(jsonObject.toString());
+				
+				 
+				 
+				 return JSONObject;
+				 
+			 }
+			 
 
-			 public JSONObject getJson(String id) throws SQLException, ParseException {
+			 public JSONObject getJsonByImportAllList(String id) throws SQLException, ParseException {
 					
 				 
 					List<User> list = new ArrayList();
@@ -114,7 +142,6 @@ public class ControllerServ extends HttpServlet {
 			 
 			 
 			 
-			 
 			 private void insertProduct(HttpServletRequest request, HttpServletResponse response)
 						throws SQLException, IOException, ServletException, ParseException{
 				 RequestDispatcher dispatcher = request.getRequestDispatcher("/UserForm.jsp");
@@ -129,7 +156,14 @@ public class ControllerServ extends HttpServlet {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					Date date = sdf.parse(birthDate);
 					
-					User newUser = new User(name, surname, date, age, type);
+					
+					
+					
+				
+					Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+					
+					
+					User newUser = new User(name, surname, date, age, type,timestamp);
 					daoUser.save(newUser);
 					
 					forward(request,response,"/home.jsp");

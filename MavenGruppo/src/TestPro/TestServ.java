@@ -14,8 +14,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import org.junit.Assert;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import javax.servlet.ServletException;
@@ -25,7 +32,7 @@ import javax.sql.DataSource;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -35,7 +42,7 @@ import org.mockito.MockitoAnnotations;
 import org.skyscreamer.jsonassert.JSONAssert;
 
 import com.google.gson.Gson;
-
+import com.google.gson.JsonObject;
 
 import Controller.ControllerServ;
 import Database.CrudDaoUser;
@@ -106,7 +113,7 @@ public class TestServ {
 	
 
 	@Test
-	public void testParam() throws IOException, ServletException, SQLException, ParseException, JSONException {
+	public void testParam() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 		
 		
 //	 when(request.getParameter("op")).thenReturn("insert");
@@ -132,13 +139,20 @@ public class TestServ {
 	  
 	        
 //	        cont.insertProduct(mockRequest, mockResponse);
+	 
 	        
-	        JSONObject json = new JSONObject();
-	        
-	       json =  cont.getJson("1");
-	       System.out.println(json);
 	       
-	       JSONAssert.assertEquals("{name:\"Jason\"}", json, false);
+	        
+	        JSONObject jsonn = new JSONObject();
+	        jsonn = cont.getJsonByImportAllList("1");
+	        
+
+	     
+	        JSONObject json = new JSONObject(); 
+	        json =  cont.getJson("1");
+	        System.out.println(json);
+//	  
+	        JSONAssert.assertEquals("{name:\"aaaa\"}", json, false);
 	       
 	}
 	

@@ -36,7 +36,7 @@ public class CrudDaoUser implements UserDao{
 	public List<User> findAll() throws SQLException {
 		
 		List<User> listProducts = new ArrayList<>();
-		String sql = "SELECT id,firstname,lastname,birthDate,age,role FROM users";
+		String sql = "SELECT id,name,surname,birthDate,age,role,info FROM users";
 	
 		
 		Connection conn = DbConnect.getInstance().getConnection();
@@ -45,19 +45,20 @@ public class CrudDaoUser implements UserDao{
 		resultSet = stm.executeQuery(sql);
 		
 		while(resultSet.next()) {
-			
-			
-			
-			
+
 			String name = resultSet.getString("name");
 			String surname = resultSet.getString("surname");
 			Date birthDate = resultSet.getDate("birthDate");
 			int age = resultSet.getInt("age");
 			String type = resultSet.getString("role");
 			Type role = Type.valueOf(type);
+			java.sql.Timestamp ts = resultSet.getTimestamp("info");
+			String id = resultSet.getString("id");
 			
-			 
-			User user = new User(name, surname, birthDate, age, role);
+			int idInt = Integer.parseInt(id);
+			
+		
+			User user = new User(idInt, name, birthDate, surname, age, role, ts);
 			listProducts.add(user);
 		}
 		
@@ -68,31 +69,27 @@ public class CrudDaoUser implements UserDao{
 	@Override
 	public boolean save(User user) throws SQLException, ParseException {
 		
-		String sql = "INSERT into users (firstname, lastname, birthDate, age, role, info)VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT into users (name, surname, birthDate, age, role, info)VALUES(?,?,?,?,?,?)";
 		boolean rowInserted = false;
 		Connection conn = DbConnect.getInstance().getConnection();
 			PreparedStatement stm = conn.prepareStatement(sql);
 			
-			
-			Date date = new Date();
-			date.getTime();
-			String formattedDate = new SimpleDateFormat("yyyyMMdd").format(date);
-			Timestamp timestamp = new Timestamp(new SimpleDateFormat("yyyyMMdd").parse(formattedDate).getTime());
+
 			
 			java.util.Date utilDate = user.getBirthDate();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-			final String stringDate= dateFormat.format(utilDate);
-			final java.sql.Date sqlDate=  java.sql.Date.valueOf(stringDate);
+			final String stringDate = dateFormat.format(utilDate);
+			final java.sql.Date sqlDate =  java.sql.Date.valueOf(stringDate);
 			final String role =  String.valueOf(user.getType());
 			
-			
+			Timestamp ts = user.getCreationTimestamp();
 			
 			stm.setString(1, user.getName());
 			stm.setString(2, user.getSurname());
 			stm.setDate(3, sqlDate);  
 			stm.setInt(4, user.getAge());
 			stm.setString(5, role);
-			stm.setString(6, formattedDate);
+			stm.setTimestamp(6, ts);
 			
 			rowInserted = stm.executeUpdate() > 0;
 			
@@ -102,9 +99,12 @@ public class CrudDaoUser implements UserDao{
 
 	@Override
 	public Optional<User> find(String id) throws SQLException {
-		String sql = "SELECT id,name,surname,birthdate,age,roles FROM USERS where id = ?";
+		String sql = "SELECT id,name,surname,birthdate,age,role,info FROM USERS where id = ?";
 		int idd = 0, age = 0;
 		String name = "", surname = "", roles = "";
+		java.sql.Timestamp info = null;
+		java.sql.Date sqlDate = null;
+		
 		Connection conn = DbConnect.getInstance().getConnection();
 		
 //		java.util.Date utilDate = null;
@@ -120,13 +120,16 @@ public class CrudDaoUser implements UserDao{
 		if(resultSet.next()) {
 			idd = resultSet.getInt("id");
 			name = resultSet.getString("name");
-			surname = resultSet.getString("Surname");
+			surname = resultSet.getString("surname");
+			sqlDate = resultSet.getDate("birthdate");
 			age = resultSet.getInt("age");
-			roles = resultSet.getString("roles");
+			roles = resultSet.getString("role");
+			info = resultSet.getTimestamp("info");
 		}
-		Date date = null;
-	//	return Optional.of(new User(idd, name, date,surname, age, role));
-		return null;
+		Type type = Type.valueOf(roles);
+		
+		return Optional.of(new User(name, surname, sqlDate, info, age, idd, type));
+		
 	}
 
 	@Override
