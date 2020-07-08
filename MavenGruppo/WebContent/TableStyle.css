@@ -1,0 +1,34 @@
+@font-face {
+	font-family: 'FontsFree-Net-SFProDisplay-Regular';
+	src: url('FontsFree-Net-SFProDisplay-Regular.ttf') format('truetype');
+}
+
+.header {
+	background-color: black;
+	height: 45px;
+	width: 500px;
+}
+
+.words {
+	font-family: 'FontsFree-Net-SFProDisplay-Regular';
+	font-size: 16px;
+	color: white;
+}
+
+.block {
+	border: 1px solid black;
+	border-collapse: collapse;
+	font-family: 'FontsFree-Net-SFProDisplay-Regular';
+	font-size: 20px;
+	color: black;
+	height: 30px;
+	width: 500px;
+}
+
+.t {
+	
+	border: 1px solid black;
+	border-collapse: collapse;
+	border-radius: 40px;
+	
+}

@@ -11,7 +11,7 @@ public class checkUserPass {
 	public static boolean insertUser(String username, String password, String email) {
 		try {
 			Connection conn = DbConnect.getInstance().getConnection();
-			String query = "insert into webaccount values (?,?,?)";
+			String query = "insert into login values (?,?,?)";
 			PreparedStatement psm = conn.prepareStatement(query);
 			psm.setString(1, username);
 			psm.setString(2, password);
@@ -34,7 +34,7 @@ public class checkUserPass {
 		try {
 			
 			Connection conn = DbConnect.getInstance().getConnection();
-			String query = "select * from webaccount where username =? and password =?";
+			String query = "select * from login where username =? and password =?";
 			PreparedStatement psm = conn.prepareStatement(query);
 			psm.setString(1, user);
 			psm.setString(2, pass);
@@ -53,7 +53,7 @@ public class checkUserPass {
 	
 	public static boolean userExist(String user) {
 		
-		String query = "select username from webaccount";
+		String query = "select username from login";
 		
 		try {
 			Connection conn = DbConnect.getInstance().getConnection();
