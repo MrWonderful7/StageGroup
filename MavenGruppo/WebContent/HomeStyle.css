@@ -1,0 +1,49 @@
+@font-face {
+	font-family: 'FontsFree-Net-SFProDisplay-Regular';
+	src: url('FontsFree-Net-SFProDisplay-Regular.ttf') format('truetype');
+}
+
+.mainBox{
+	
+	display:flex;
+	flex-direction: column;
+	
+	
+}
+
+.panel{
+	background-image: url("./Images/way.png");
+	width: 100%;
+	height: 900px;
+	
+}
+
+.line{
+	
+	background-color: blue;
+	opacity: 0.8;
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items:center;
+	width: 100%;
+	height: 70px;
+	
+	
+}
+
+.date{
+	
+	color:white;
+	font-family: 'FontsFree-Net-SFProDisplay-Regular', coursive;
+	font-size: 20px;
+	padding: 12px;
+}
+
+.words{
+	
+	color:white;
+	font-family: 'FontsFree-Net-SFProDisplay-Regular', coursive;
+	font-size: 20px;
+	padding: 12px;
+}

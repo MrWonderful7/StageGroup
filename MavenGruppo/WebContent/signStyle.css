@@ -1,0 +1,92 @@
+@font-face {
+	font-family: 'FontsFree-Net-SFProDisplay-Regular';
+	src: url('FontsFree-Net-SFProDisplay-Regular.ttf') format('truetype');
+}
+
+
+.internalBox {
+	display: flex;
+	flex-direction: column;
+	background-image: url("./Images/3dbk.png");
+	width: 100%;
+	height: 900px;
+	justify-content: center;
+	
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.rowOne {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+
+.rowTwo {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	padding: 0px 0px 0px 0px;
+}
+
+.buttonRow {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 70px 0px 0px 0px;
+}
+
+.submit {
+	border: 0;
+	background-color: black;
+	border-radius: 50px;
+	color: white;
+	background: black;
+	cursor: pointer;
+	font-size: 30px;
+	font-family: 'FontsFree-Net-SFProDisplay-Regular', coursive;
+	height: 70px;
+	width: 140px;
+}
+
+.words {
+	font-size: 35px;
+	font-family: 'FontsFree-Net-SFProDisplay-Regular', coursive;
+	color: 		black;
+	padding: 0px 0px 0px 20px;
+}
+
+
+
+.imgId {
+	height: 32px;
+	width: 32px;
+	margin: -2px 0px;
+}
+
+.myInput {
+	display: flex;
+	align-items: center;
+	background-color: white;
+	box-sizing: border-box;
+	padding: 0px 16px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 50px;
+	font-family: 'Architects Daughter', cursive;
+}
+
+input {
+	background: transparent;
+	border: 0;
+}
+
+input:focus {
+	outline: none;
+}
