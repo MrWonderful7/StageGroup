@@ -11,7 +11,7 @@
 
  <li class="active"><a href="UserForm.jsp">Insert ordini</a></li>
 
-  <li><a href="ControllerServ?op=edit">Insert</a></li>
+  <li><a href="ControllerServ?op=listUsers">List</a></li>
 
 </body>
 </html>
