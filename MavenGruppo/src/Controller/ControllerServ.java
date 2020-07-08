@@ -19,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,6 +31,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import Database.CrudDaoUser;
+import Database.checkUserPass;
 import model.Type;
 import model.User;
 
@@ -53,12 +55,32 @@ public class ControllerServ extends HttpServlet {
     
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		HttpSession session = request.getSession();
+		String user = request.getParameter("account");
+	    String pass = request.getParameter("password");
 		
 		String op = request.getParameter("op");
 		
 		try {
 			switch(op) {
+			
+			case"login":
+				if(checkUserPass.login(user, pass) == true) {
+		    		System.out.println("it s ok..:D");
+		    			session.setAttribute("user", user);
+		    			session.setMaxInactiveInterval(300);
+		    				forward(request,response,"/home.jsp");
+		    	} 
+		    	else {
+		    		System.out.println("non entra");
+		    			forward(request,response,"/login.jsp");
+		    	}
+				break;
+			
+			case"logout":
+				session.invalidate();
+		    	forward(request,response,"/login.jsp");
+				break;
 			
 			case"edit":
 				showEditForm(request, response);
@@ -90,7 +112,7 @@ public class ControllerServ extends HttpServlet {
 				
 					Optional<User> existingProduct = daoUser.find(id);
 					RequestDispatcher disp = request.getRequestDispatcher("/UserForm.jsp");
-//					existingProduct.ifPresent(s -> request.setAttribute("product", s));
+					existingProduct.ifPresent(s -> request.setAttribute("product", s));
 					disp.forward(request, response);
 				}
 			 
@@ -116,13 +138,11 @@ public class ControllerServ extends HttpServlet {
 			 public JSONObject getJson(String id) throws SQLException, JSONException, org.json.simple.parser.ParseException {
 				 
 				 User user = new User();
-				 
 				 user = daoUser.findIdForJson(id);
 				 
 				 
 					
 					String jsonn = new Gson().toJson(user);
-				
 					JsonObject jsonObject= null;
 					jsonObject = new JsonParser().parse(jsonn).getAsJsonObject();
 					JSONObject JSONObject = new JSONObject(jsonObject.toString());
