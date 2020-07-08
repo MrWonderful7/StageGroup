@@ -106,15 +106,18 @@ public class ControllerServ extends HttpServlet {
 	
 			 private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException, JSONException, org.json.simple.parser.ParseException {
 		
-				 RequestDispatcher dispatcher = request.getRequestDispatcher("ListUsers.jsp");
+				 RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
 				 
-//					List<User> listProducts = daoUser.findAll();
-//					String jsonn = new Gson().toJson(listProducts);
-//					JSONArray array = new JSONArray(jsonn);
+
 				 
 				List<User> l = new ArrayList();
-				 l = daoUser.findAll();
-				 	
+				l = daoUser.findAll();
+				
+				for(int i = 0; i< l.size(); i++) {
+					System.out.println(l.get(i));
+				}
+				
+				System.out.println();
 				 String jsonn = new Gson().toJson(l); 
 				 
 				 JSONArray array = new JSONArray(jsonn);
@@ -122,14 +125,9 @@ public class ControllerServ extends HttpServlet {
 				 for(int i = 0; i< array.length(); i++){
 					 System.out.println(array.get(i));
 				 }
-	//			String jsonn = new Gson().toJson(user);
-//				JsonObject jsonObjectc= null;
-//				jsonObjectc = new JsonParser().parse(jsonn).getAsJsonObject();
-//				JSONObject JSONObjectt = new JSONObject(jsonObjectc.toString());
+
 					 
-					 
-					 
-				request.setAttribute("listProducts", jsonn);
+				request.setAttribute("listProducts", l);
 //					JsonParser jsonParser = new JsonParser();
 //					JsonObject objectFromString = jsonParser.parse(jsonn).getAsJsonObject();
 //					JSONParser parser = new JSONParser();

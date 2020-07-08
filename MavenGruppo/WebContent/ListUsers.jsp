@@ -25,6 +25,8 @@
  
    */
    
+   
+   
    String j = (String)request.getAttribute("listProducts");
 
    JSONArray array = new JSONArray(j);
@@ -57,15 +59,6 @@
                 </tr>
             </c:forEach>
         </table>
-
-
- <UL>
-      <c-rt:forEach var="bike" items="<%= array %>">
-        <LI><c:out value="${bike}" />
-      </c-rt:forEach>
-    </UL>
-
-
 
 
 
