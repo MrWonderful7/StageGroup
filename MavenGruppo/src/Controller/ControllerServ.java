@@ -27,34 +27,36 @@ import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import Database.CrudDaoUser;
 import Database.checkUserPass;
+
 import model.Type;
 import model.User;
 
-/**
- * Servlet implementation class ControllerServ
- */
+
 @WebServlet("/ControllerServ")
 public class ControllerServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-  
-	
+ 
     public ControllerServ() {
         super();
-        // TODO Auto-generated constructor stub
     }
-
-	
-    private CrudDaoUser daoUser= CrudDaoUser.getInstance();
+  private CrudDaoUser daoUser= CrudDaoUser.getInstance();
     
     
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+				doPost(request, response);
+				}
+
+
+			 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String user = request.getParameter("account");
 	    String pass = request.getParameter("password");
@@ -88,15 +90,59 @@ public class ControllerServ extends HttpServlet {
 			case"insert":
 				insertProduct(request, response);
 				break;
+			case "listUsers":
+				listUsers(request, response);
+			
+				break;
 				
 		
 	}
 	}catch(Exception e) {
-		
+		System.out.println(e);
 	}
 		}
 			
-			 private void forward(HttpServletRequest request, HttpServletResponse response, String page) 
+	
+	
+			 private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException, JSONException, org.json.simple.parser.ParseException {
+		
+				 RequestDispatcher dispatcher = request.getRequestDispatcher("UserList.jsp");
+				 
+
+				 
+				List<User> l = new ArrayList();
+				l = daoUser.findAll();
+				
+				for(int i = 0; i< l.size(); i++) {
+					System.out.println(l.get(i));
+				}
+				
+				System.out.println();
+				 String jsonn = new Gson().toJson(l); 
+				 
+				 JSONArray array = new JSONArray(jsonn);
+				 
+				 for(int i = 0; i< array.length(); i++){
+					 System.out.println(array.get(i));
+				 }
+
+					 
+				request.setAttribute("listProducts", l);
+//					JsonParser jsonParser = new JsonParser();
+//					JsonObject objectFromString = jsonParser.parse(jsonn).getAsJsonObject();
+//					JSONParser parser = new JSONParser();
+//					JSONObject json = (JSONObject) parser.parse(jsonn);
+//					JsonObject jsonObject = new JsonParser().parse(jsonn).getAsJsonObject();
+//					JSONArray array = new JSONArray(jsonn);
+					
+//					request.setAttribute("listProducts", array);
+					
+					dispatcher.forward(request, response);
+	}
+
+
+
+			private void forward(HttpServletRequest request, HttpServletResponse response, String page) 
 				       throws ServletException, IOException
 				    {
 				        ServletContext sc = getServletContext();
@@ -149,7 +195,7 @@ public class ControllerServ extends HttpServlet {
 					return JSONObject;
 				 }catch(JSONException e) {
 					 e.printStackTrace();
-				 }
+				 	}
 				 return null;
 				 }
 			 
@@ -204,15 +250,10 @@ public class ControllerServ extends HttpServlet {
 					daoUser.save(newUser);
 					
 					forward(request,response,"/home.jsp");
-					
-
-				}
-
-
-			 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	
+		
 	}
+			 
+			 
 
 }

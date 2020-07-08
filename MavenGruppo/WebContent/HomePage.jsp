@@ -8,12 +8,12 @@
 <div>
 
 	<div class='mainBox'>
-	
-	<div class='line'>
-		
-			<label class='words'>Home Page</label> <label class='words'>Insert
-				User</label> <label class='words'>Users List</label>
 
+		<div class='line'>
+
+			<label class='words'>Home Page</label> <a class='words'
+				href="Controller?op=delete&opp=<c:out value='${product.id}' />">Users
+				List</a> <a class='words' href="Controller?op=list">Insert User</a>
 			<div class='date'>
 				<%
 					java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -23,10 +23,10 @@
 			</div>
 
 		</div>
-	
-	
-	
-	
+
+
+
+
 	</div>
 
 

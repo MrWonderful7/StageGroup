@@ -5,5 +5,4 @@ public enum Type {
 	CHILD,OWNER,SPOUSE;
 
 	
-	
 }

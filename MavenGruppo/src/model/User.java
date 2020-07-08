@@ -14,9 +14,7 @@ public class User {
 	int id;
 	Type type;
 	
-	
-	
-	
+
 	public User(String name, String surname, Date birthDate, Timestamp creationTimestamp, int age, int id, Type type) {
 		
 		this.name = name;
@@ -114,6 +112,13 @@ public User() {}
 
 	public void setType(Type type) {
 		this.type = type;
+	}
+	
+	
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", surname=" + surname + ", birthDate=" + birthDate + ", CreationTimestamp="
+				+ CreationTimestamp + ", age=" + age + ", id=" + id + ", type=" + type + "]";
 	}
 	
 }
