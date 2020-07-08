@@ -32,7 +32,7 @@
 	align-items: center;
 	flex-direction: column;
 	width: 100%;
-	
+	padding: 0px 0px 0px 0px;
 }
 
 .buttonRow {
@@ -79,7 +79,6 @@
 	padding: 0px 16px;
 	border: 1px solid rgba(255, 255, 255, 0.5);
 	border-radius: 50px;
-	
 	font-family: 'Architects Daughter', cursive;
 }
 
@@ -91,4 +90,3 @@ input {
 
 input:focus {
 	outline: none;
-}
