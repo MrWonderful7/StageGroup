@@ -95,24 +95,41 @@ public class ControllerServ extends HttpServlet {
 				}
 			 
 			 
+//			 public JSONObject getJson(String id) throws SQLException, JSONException, org.json.simple.parser.ParseException {
+//				 
+//		 
+//				Optional<User> list = Optional.empty();
+//				list =  daoUser.find(id);
+//				
+//				String jsonn = new Gson().toJson(list);
+//			
+//				JsonObject jsonObject= null;
+//				jsonObject = new JsonParser().parse(jsonn).getAsJsonObject();
+//				JSONObject JSONObject = new JSONObject(jsonObject.toString());
+//				
+//				 return JSONObject;
+//				 
+//			 }
+//			 
+			 
+			 
 			 public JSONObject getJson(String id) throws SQLException, JSONException, org.json.simple.parser.ParseException {
 				 
-		 
-				Optional<User> list = Optional.empty();
-				list =  daoUser.find(id);
-				
-				String jsonn = new Gson().toJson(list);
-				
-				
-				JsonObject jsonObject= null;
-				jsonObject = new JsonParser().parse(jsonn).getAsJsonObject();
-				JSONObject JSONObject = new JSONObject(jsonObject.toString());
-				
+				 User user = new User();
+				 
+				 user = daoUser.findIdForJson(id);
 				 
 				 
-				 return JSONObject;
-				 
-			 }
+					
+					String jsonn = new Gson().toJson(user);
+				
+					JsonObject jsonObject= null;
+					jsonObject = new JsonParser().parse(jsonn).getAsJsonObject();
+					JSONObject JSONObject = new JSONObject(jsonObject.toString());
+					
+					 return JSONObject;
+					 
+				 }
 			 
 
 			 public JSONObject getJsonByImportAllList(String id) throws SQLException, ParseException {

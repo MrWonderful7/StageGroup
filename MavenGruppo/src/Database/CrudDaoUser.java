@@ -143,6 +143,42 @@ public class CrudDaoUser implements UserDao{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public User findIdForJson(String id) throws SQLException {
+		
+		String sql = "SELECT id,name,surname,birthdate,age,role,info FROM USERS where id = ?";
+		int idd = 0, age = 0;
+		String name = "", surname = "", roles = "";
+		java.sql.Timestamp info = null;
+		java.sql.Date sqlDate = null;
+		
+		Connection conn = DbConnect.getInstance().getConnection();
+		
+//		java.util.Date utilDate = null;
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//		final String stringDate= dateFormat.format(utilDate);
+//		final java.sql.Date sqlDate=  java.sql.Date.valueOf(stringDate);
+		
+		
+		PreparedStatement stm = conn.prepareStatement(sql);
+		stm.setString(1, id);
+		ResultSet resultSet = stm.executeQuery();
+		
+		if(resultSet.next()) {
+			idd = resultSet.getInt("id");
+			name = resultSet.getString("name");
+			surname = resultSet.getString("surname");
+			sqlDate = resultSet.getDate("birthdate");
+			age = resultSet.getInt("age");
+			roles = resultSet.getString("role");
+			info = resultSet.getTimestamp("info");
+		}
+		Type type = Type.valueOf(roles);
+		User user = new User(name, surname, sqlDate, info, age, idd, type);
+		
+		return user;
+	}
 	
 	
 }
