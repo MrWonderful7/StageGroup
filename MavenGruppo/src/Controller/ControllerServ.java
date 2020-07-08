@@ -140,15 +140,17 @@ public class ControllerServ extends HttpServlet {
 				 User user = new User();
 				 user = daoUser.findIdForJson(id);
 				 
-				 
+				 try {
 					
 					String jsonn = new Gson().toJson(user);
 					JsonObject jsonObject= null;
 					jsonObject = new JsonParser().parse(jsonn).getAsJsonObject();
 					JSONObject JSONObject = new JSONObject(jsonObject.toString());
-					
-					 return JSONObject;
-					 
+					return JSONObject;
+				 }catch(JSONException e) {
+					 e.printStackTrace();
+				 }
+				 return null;
 				 }
 			 
 
@@ -192,8 +194,6 @@ public class ControllerServ extends HttpServlet {
 					
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					Date date = sdf.parse(birthDate);
-					
-					
 					
 					
 				
