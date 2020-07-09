@@ -29,7 +29,12 @@
 				<td class='block'>${product.birthDate}</td>
 				<td class='block'>${product.age}</td>
 				<td class='block'>${product.type}</td>
-				<td class='block'>${product.creationTimestamp}</td>
+				<td class='words'>${product.creationTimestamp}</td>
+				<td class='block'><a
+					href="Controller?op=edit&id=<c:out value='${stuff.id}' />">Edit</a></td>
+				<td class='block'
+					<a
+												href="Controller?op=delete&id=<c:out value='${stuff.id}' />">Delete</a>></td>
 
 
 			</tr>
