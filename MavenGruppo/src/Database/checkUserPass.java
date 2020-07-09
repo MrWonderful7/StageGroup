@@ -11,7 +11,7 @@ public class checkUserPass {
 	public static boolean insertUser(String username, String password, String email) {
 		try {
 			Connection conn = DbConnect.getInstance().getConnection();
-			String query = "insert into login values (?,?,?)";
+			String query = "insert into webaccount values (?,?,?)";
 			PreparedStatement psm = conn.prepareStatement(query);
 			psm.setString(1, username);
 			psm.setString(2, password);
