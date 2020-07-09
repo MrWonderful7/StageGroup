@@ -6,7 +6,7 @@
 .header {
 	background-color: black;
 	height: 45px;
-	width: 500px;
+	width: 300px;
 }
 
 .words {
@@ -22,7 +22,7 @@
 	font-size: 20px;
 	color: black;
 	height: 30px;
-	width: 500px;
+	width: 100%;
 }
 
 .t {
