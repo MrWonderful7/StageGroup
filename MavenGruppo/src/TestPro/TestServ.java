@@ -142,12 +142,9 @@ public class TestServ {
 	        
 	        JSONObject jsonn = new JSONObject();
 	        jsonn = cont.getJsonByImportAllList("1");
-	        
-
 	        JSONObject json = new JSONObject(); 
 	        json =  cont.getJson("1");
 	        System.out.println(json);
-//	  
 	        JSONAssert.assertEquals("{name:\"aaaa\"}", json, false);
 
 	}
@@ -161,7 +158,6 @@ public class TestServ {
 		  daoUser.save(user);
 		  
 		  Optional<User> user2 = daoUser.find("16");
-	
 		  assertEquals(user, user2);
 	    }
 	

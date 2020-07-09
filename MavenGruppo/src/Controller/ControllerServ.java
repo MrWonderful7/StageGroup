@@ -113,8 +113,6 @@ public class ControllerServ extends HttpServlet {
 				List<User> l = new ArrayList();
 				l = daoUser.findAll();
 				
-//				
-//				
 //				String jsonn = new Gson().toJson(l); 
 //				 
 //				JSONArray array = new JSONArray(jsonn);
@@ -123,7 +121,6 @@ public class ControllerServ extends HttpServlet {
 //					 System.out.println(array.get(i));
 //				 }
 
-					 
 				request.setAttribute("listProducts", l);
 //					JsonParser jsonParser = new JsonParser();
 //					JsonObject objectFromString = jsonParser.parse(jsonn).getAsJsonObject();
