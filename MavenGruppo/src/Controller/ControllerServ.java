@@ -24,7 +24,8 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
+
+
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -113,18 +114,15 @@ public class ControllerServ extends HttpServlet {
 				List<User> l = new ArrayList();
 				l = daoUser.findAll();
 				
-				for(int i = 0; i< l.size(); i++) {
-					System.out.println(l.get(i));
-				}
-				
-				System.out.println();
-				 String jsonn = new Gson().toJson(l); 
-				 
-				 JSONArray array = new JSONArray(jsonn);
-				 
-				 for(int i = 0; i< array.length(); i++){
-					 System.out.println(array.get(i));
-				 }
+//				
+//				
+//				String jsonn = new Gson().toJson(l); 
+//				 
+//				JSONArray array = new JSONArray(jsonn);
+//				 
+//				for(int i = 0; i< array.length(); i++){
+//					 System.out.println(array.get(i));
+//				 }
 
 					 
 				request.setAttribute("listProducts", l);
@@ -227,7 +225,7 @@ public class ControllerServ extends HttpServlet {
 			 
 			 
 			 
-			 private void insertProduct(HttpServletRequest request, HttpServletResponse response)
+			 public void insertProduct(HttpServletRequest request, HttpServletResponse response)
 						throws SQLException, IOException, ServletException, ParseException{
 				 RequestDispatcher dispatcher = request.getRequestDispatcher("/UserForm.jsp");
 		

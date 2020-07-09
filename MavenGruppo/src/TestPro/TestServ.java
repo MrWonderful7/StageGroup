@@ -78,7 +78,7 @@ public class TestServ {
 	        MockitoAnnotations.initMocks(this);
 	     
 		
-//			
+			
 //			assertNotNull(ds);
 ////	        when(c.prepareStatement(any(String.class))).thenReturn(stmt);
 //	        when(ds.getConnection()).thenReturn(c);
@@ -133,12 +133,12 @@ public class TestServ {
 	        ControllerServ cont = new ControllerServ();
 	      
 	        when(mockRequest.getParameter("name")).thenReturn("admin");
-	        when(mockRequest.getParameter("description")).thenReturn("test");
-	        when(mockRequest.getParameter("quantity")).thenReturn("1");
-	        when(mockRequest.getParameter("location")).thenReturn("edit");
-	  
+	        when(mockRequest.getParameter("surname")).thenReturn("test");
+//	        when(mockRequest.getParameter("birthDate")).thenReturn("1");
+	        when(mockRequest.getParameter("age")).thenReturn("edit");
+	        when(mockRequest.getParameter("roles")).thenReturn("owner");
 	        
-//	        cont.insertProduct(mockRequest, mockResponse);
+	        cont.insertProduct(mockRequest, mockResponse);
 	 
 	        
 	       
@@ -147,28 +147,32 @@ public class TestServ {
 	        jsonn = cont.getJsonByImportAllList("1");
 	        
 
-	     
 	        JSONObject json = new JSONObject(); 
 	        json =  cont.getJson("1");
 	        System.out.println(json);
 //	  
 	        JSONAssert.assertEquals("{name:\"aaaa\"}", json, false);
-	       
+
 	}
 	
 	
 	
-//	 @Test
-//	    public void createUser() throws SQLException, ParseException {
-//	       
-//		  CrudDaoUser daoUser = CrudDaoUser.getInstance();
-//		  daoUser.save(user);
-//		  
-//		  Optional<User> user2 = daoUser.find("16");
-//	
-//		  assertEquals(user, user2);
-//	    }
-//	
+	 @Test
+	    public void createUser() throws SQLException, ParseException {
+	       
+		  CrudDaoUser daoUser = CrudDaoUser.getInstance();
+		  daoUser.save(user);
+		  
+		  Optional<User> user2 = daoUser.find("16");
+	
+		  assertEquals(user, user2);
+	    }
 	
 	
+	
+	 
+	 
+	 
+	 
+//     JSONAssert.assertEquals("{id:1}",json,false);
 }
