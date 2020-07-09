@@ -59,7 +59,7 @@ public class ControllerServ extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
-		String user = request.getParameter("account");
+		String user = request.getParameter("username");
 	    String pass = request.getParameter("password");
 		
 		String op = request.getParameter("op");
@@ -67,16 +67,18 @@ public class ControllerServ extends HttpServlet {
 		try {
 			switch(op) {
 			
+			
+			
 			case"login":
 				if(checkUserPass.login(user, pass) == true) {
 		    		System.out.println("it s ok..:D");
 		    			session.setAttribute("user", user);
 		    			session.setMaxInactiveInterval(300);
-		    				forward(request,response,"/home.jsp");
+		    				forward(request,response,"/HomePage.jsp");
 		    	} 
 		    	else {
 		    		System.out.println("non entra");
-		    			forward(request,response,"/login.jsp");
+		    			forward(request,response,"/MainPage.jsp");
 		    	}
 				break;
 			

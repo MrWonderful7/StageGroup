@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
 <!DOCTYPE html>
 <html>
 <link href="AddStyle.css" rel="stylesheet" type="text/css">
@@ -31,7 +32,8 @@
 		<div class='rowLine'>
 			<label class='words'>New User</label>
 		</div>
-
+ 			<form action="ControllerServ" method="POST" name="dati">
+            <input type=hidden name="op" value="register">
 
 		<div class='row'>
 			<label class='word'>Name</label> <input class='in'></input>
@@ -53,7 +55,7 @@
 		<div class ='block'>
 			<button class='btn'>ADD</button>
 		</div>
-
+</form>
 	
 </div>
 </div>

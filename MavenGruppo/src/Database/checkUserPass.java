@@ -34,7 +34,7 @@ public class checkUserPass {
 		try {
 			
 			Connection conn = DbConnect.getInstance().getConnection();
-			String query = "select * from login where username =? and password =?";
+			String query = "select * from webaccount where username =? and password =?";
 			PreparedStatement psm = conn.prepareStatement(query);
 			psm.setString(1, user);
 			psm.setString(2, pass);

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+	<% String user = (String) session.getAttribute("user");
+   if (user==null){%>
+<jsp:forward page="/MainPage.jsp" /> 
+<%return;}%>
 <!DOCTYPE html>
 <html>
 <link href="HomeStyle.css" rel="stylesheet" type="text/css">
