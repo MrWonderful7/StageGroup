@@ -72,7 +72,7 @@ public class CrudDaoUser implements UserDao{
 		String sql = "INSERT into users (name, surname, birthDate, age, role, info)VALUES(?,?,?,?,?,?)";
 		boolean rowInserted = false;
 		Connection conn = DbConnect.getInstance().getConnection();
-			PreparedStatement stm = conn.prepareStatement(sql);
+		PreparedStatement stm = conn.prepareStatement(sql);
 			
 
 			

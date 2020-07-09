@@ -93,7 +93,6 @@ public class ControllerServ extends HttpServlet {
 				break;
 			case "listUsers":
 				listUsers(request, response);
-			
 				break;
 				
 		
