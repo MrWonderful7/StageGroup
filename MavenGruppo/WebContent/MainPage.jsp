@@ -25,7 +25,7 @@
 						type='password' id="userName" class='restyle'></input>
 				</div>
 				<div class='buttonRow'>
-					<button class="submit" onclick="">Sign In</button>
+					<button class="submit" onclick="">Login</button>
 				</div>
 			</div>
 		</div>

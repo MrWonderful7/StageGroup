@@ -32,7 +32,7 @@
 						type='password' id="userName" class='restyle'></input>
 				</div>
 				<div class='buttonRow'>
-					<button class="submit" onclick="">Submit</button>
+					<button class="submit" onclick="">Sign In</button>
 				</div>
 			</div>
 		</div>
