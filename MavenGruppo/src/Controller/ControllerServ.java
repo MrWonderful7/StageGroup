@@ -79,7 +79,7 @@ public class ControllerServ extends HttpServlet {
 	    		String userNameRegister = request.getParameter("acc");
 	    		String emailRegister = request.getParameter("email");
 	    		
-	    	if(checkUserPass.insertUser(passwordRegister, userNameRegister, emailRegister)== true) {
+	    	if(checkUserPass.insertUser(userNameRegister,passwordRegister, emailRegister)== true) {
 	    			System.out.println("adding successfully..");
 	    				forward(request,response,"/MainPage.jsp");
 	    		}else{

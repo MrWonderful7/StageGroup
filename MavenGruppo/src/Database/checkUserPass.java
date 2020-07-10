@@ -73,7 +73,6 @@ public class checkUserPass {
 		if(BCrypt.checkpw(pass, passDbHash) == true) {
 			System.out.println("Merge!!!--");
 			return true;
-		
 		}else {
 			System.out.println("NUUU!!!--");
 			return false;
