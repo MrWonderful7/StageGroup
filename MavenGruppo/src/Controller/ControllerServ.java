@@ -101,7 +101,7 @@ public class ControllerServ extends HttpServlet {
 			
 			case"logout":
 				session.invalidate();
-		    	forward(request,response,"/login.jsp");
+		    	forward(request,response,"/MainPage.jsp");
 				break;
 			
 			case"edit":
@@ -248,7 +248,7 @@ public class ControllerServ extends HttpServlet {
 					String surname = request.getParameter("surname");
 					String birthDate = request.getParameter("birthDate");
 					int age =  Integer.parseInt(request.getParameter("age"));
-					String roles = request.getParameter("roles");
+					String roles = request.getParameter("role");
 					Type type = Type.valueOf(roles);
 					
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -262,7 +262,7 @@ public class ControllerServ extends HttpServlet {
 					User newUser = new User(name, surname, date, age, type,timestamp);
 					daoUser.save(newUser);
 					
-					forward(request,response,"/home.jsp");
+					forward(request,response,"/HomePage.jsp");
 	
 		
 	}

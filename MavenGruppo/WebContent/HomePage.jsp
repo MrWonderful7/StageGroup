@@ -22,6 +22,7 @@
 			 <a class='words' href="HomePage.jsp">Home Page</a>
 			 <a class='words' href="ControllerServ?op=listUsers">ListUsers</a>
 			 <a class='words' href="AddUser.jsp">Insert User</a>
+			
 			<div class='date'>
 				<%
 					java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy hh:mm");
@@ -29,7 +30,7 @@
 				<h5><%=df.format(new java.util.Date())%>
 				</h5>
 			</div>
-
+ <a class='words' href="ControllerServ?op=logout">Logout</a>
 		</div>
 
 
