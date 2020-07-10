@@ -28,6 +28,10 @@
 				<div class='buttonRow'>
 					<button class="submit" >Login</button>
 				</div>
+
+				
+					<a class='words' href="Registration.jsp">Create Account</a>
+				
 			</div>
 		</div>
 	
