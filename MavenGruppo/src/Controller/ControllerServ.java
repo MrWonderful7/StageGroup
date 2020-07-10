@@ -1,6 +1,6 @@
 package Controller;
 
-import java.awt.RenderingHints.Key;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -8,9 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 import java.util.Optional;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -28,7 +28,7 @@ import org.json.JSONObject;
 
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -135,7 +135,7 @@ public class ControllerServ extends HttpServlet {
 				 
 
 				 
-				List<User> l = new ArrayList();
+				List<User> l = new ArrayList<User>();
 				l = daoUser.findAll();
 				
 //				String jsonn = new Gson().toJson(l); 
@@ -176,7 +176,7 @@ public class ControllerServ extends HttpServlet {
 					
 				
 					Optional<User> existingProduct = daoUser.find(id);
-					RequestDispatcher disp = request.getRequestDispatcher("/UserForm.jsp");
+					RequestDispatcher disp = request.getRequestDispatcher("/AddUser.jsp");
 					existingProduct.ifPresent(s -> request.setAttribute("product", s));
 					disp.forward(request, response);
 				}
@@ -222,7 +222,7 @@ public class ControllerServ extends HttpServlet {
 			 public JSONObject getJsonByImportAllList(String id) throws SQLException, ParseException {
 					
 				 
-					List<User> list = new ArrayList();
+					List<User> list = new ArrayList<User>();
 					list = daoUser.findAll();
 					
 					String jsonn = new Gson().toJson(list);
@@ -259,6 +259,7 @@ public class ControllerServ extends HttpServlet {
 					
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					Date date = sdf.parse(birthDate);
+					
 					
 					
 				
