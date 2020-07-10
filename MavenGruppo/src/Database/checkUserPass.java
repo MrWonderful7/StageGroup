@@ -15,11 +15,14 @@ public class checkUserPass {
 	public static boolean insertUser(String username, String password, String email) {
 		
 		try {
-			
-			 
-			String hashed = BCrypt.hashpw(password, BCrypt.gensalt(12));
+			String hashed="";
+			 try {
+			hashed = BCrypt.hashpw(password, BCrypt.gensalt());
 		    System.out.println(hashed);
-		      
+			 }catch(Exception e) {
+				 System.out.println(e);
+				 System.out.println("problem in Bcrypt");
+			 }
 			Connection conn = DbConnect.getInstance().getConnection();
 			String query = "insert into webaccount values (?,?,?)";
 			PreparedStatement psm = conn.prepareStatement(query);

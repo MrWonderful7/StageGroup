@@ -71,22 +71,26 @@ public class ControllerServ extends HttpServlet {
 				
 			 String us = request.getParameter("acc");
 			 
-			if(checkUserPass.userExist(us) == true) {
-				System.out.println("User exist, please insert another");
-    			forward(request,response,"/AddUser.jsp");
-			}else {
-	    		String passwordRegister = request.getParameter("pass");
-	    		String userNameRegister = request.getParameter("acc");
-	    		String emailRegister = request.getParameter("email");
+			 	if(checkUserPass.userExist(us) == true) {
+			 		System.out.println("User exist, please insert another");
+			 		forward(request,response,"/AddUser.jsp");
+			 		
+			 			}else {
 	    		
-	    	if(checkUserPass.insertUser(userNameRegister,passwordRegister, emailRegister)== true) {
-	    			System.out.println("adding successfully..");
+	    		String userNameRegister = request.getParameter("acc");
+	    		String passwordRegister = request.getParameter("pass");
+	    		String emailRegister = request.getParameter("email");
+	    	
+	    	if(checkUserPass.insertUser( userNameRegister,passwordRegister, emailRegister)== true) {
+
+	    				System.out.println("adding successfully..");
 	    				forward(request,response,"/MainPage.jsp");
 	    		}else{
 	    			System.out.println("we have a problem..");
 	    				forward(request,response,"/Registration.jsp");
-	    		}
-			}
+	    			}
+			 	}
+	    	
 			
 			case"login":
 				if(checkUserPass.login(user, pass) == true) {
@@ -272,3 +276,8 @@ public class ControllerServ extends HttpServlet {
 			 
 
 }
+
+
+
+
+
