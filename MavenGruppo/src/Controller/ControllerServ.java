@@ -1,6 +1,6 @@
 package Controller;
 
-
+import java.awt.RenderingHints.Key;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -8,7 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -73,11 +75,12 @@ public class ControllerServ extends HttpServlet {
 				System.out.println("User exist, please insert another");
     			forward(request,response,"/AddUser.jsp");
 			}else {
-	    		String passwordRegister = request.getParameter("pass");
+	    		
 	    		String userNameRegister = request.getParameter("acc");
+	    		String passwordRegister = request.getParameter("pass");
 	    		String emailRegister = request.getParameter("email");
 	    		
-	    	if(checkUserPass.insertUser(passwordRegister, userNameRegister, emailRegister)== true) {
+	    	if(checkUserPass.insertUser( userNameRegister,passwordRegister, emailRegister)== true) {
 	    			System.out.println("adding successfully..");
 	    				forward(request,response,"/MainPage.jsp");
 	    		}else{
@@ -270,3 +273,8 @@ public class ControllerServ extends HttpServlet {
 			 
 
 }
+
+
+
+
+
