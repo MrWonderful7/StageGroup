@@ -3,41 +3,33 @@
 	src: url('FontsFree-Net-SFProDisplay-Regular.ttf') format('truetype');
 }
 
-.mainBox{
-	
-	
-	
+.mainBox {
 	background-image: url("./Images/way.png");
 	width: 100%;
-	height: 900        px;
-	
+	height: 900px;
 }
 
-.line{
-	
-	background:black;
+.line {
+	background: black;
 	opacity: 0.8;
-	display:flex;
+	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	align-items:center;
+	align-items: center;
 	width: 100%;
 	height: 45px;
-
 }
 
-.date{
-	
-	color:white;
+.date {
+	color: white;
 	font-family: 'FontsFree-Net-SFProDisplay-Regular', coursive;
 	font-size: 16px;
 	padding: 12px;
 	opacity: 0.9;
 }
 
-.words{
-	
-	color:white;
+.words {
+	color: white;
 	font-family: 'FontsFree-Net-SFProDisplay-Regular', coursive;
 	font-size: 16px;
 	padding: 12px;
