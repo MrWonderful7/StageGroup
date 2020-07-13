@@ -122,6 +122,9 @@ public class ControllerServ extends HttpServlet {
 			case "update":
 				updateUser(request, response);
 				break;
+			case "delete":
+				deleteProduct(request, response);
+				break;
 				
 		
 	}
@@ -130,6 +133,19 @@ public class ControllerServ extends HttpServlet {
 	}
 		}
 			
+	
+	private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException{
+		
+		int id = Integer.parseInt(request.getParameter("opp"));
+		
+		User user = new User(id);
+		daoUser.delete(user);
+		forward(request,response,"/HomePage.jsp");
+		
+
+	}
+
 	
 	
 	

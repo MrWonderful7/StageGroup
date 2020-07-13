@@ -146,8 +146,16 @@ public class CrudDaoUser implements UserDao{
 
 	@Override
 	public boolean delete(User o) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+
+		String sql = "DELETE FROM users WHERE id = ?";
+		boolean rowDeleted = false;
+		
+		Connection conn = DbConnect.getInstance().getConnection();
+			PreparedStatement stm = conn.prepareStatement(sql);
+			stm.setInt(1, o.getId());
+			rowDeleted = stm.executeUpdate() > 0;
+			
+		return rowDeleted;
 	}
 	
 	
