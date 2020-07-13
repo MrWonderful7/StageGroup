@@ -116,8 +116,11 @@ public class ControllerServ extends HttpServlet {
 			case"insert":
 				insertProduct(request, response);
 				break;
-			case "listUsers":
+			case"listUsers":
 				listUsers(request, response);
+				break;
+			case "update":
+				updateUser(request, response);
 				break;
 				
 		
@@ -127,6 +130,12 @@ public class ControllerServ extends HttpServlet {
 	}
 		}
 			
+	
+	
+	
+	
+	
+	
 	
 	
 			 private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException, JSONException, org.json.simple.parser.ParseException {
@@ -176,12 +185,22 @@ public class ControllerServ extends HttpServlet {
 					
 				
 					Optional<User> existingProduct = daoUser.find(id);
-					RequestDispatcher disp = request.getRequestDispatcher("/AddUser.jsp");
+//					RequestDispatcher disp = request.getRequestDispatcher("/AddUser.jsp");
 					existingProduct.ifPresent(s -> request.setAttribute("product", s));
-					disp.forward(request, response);
+					forward(request, response, "/editForm.jsp");
 				}
 			 
 			 
+			 
+			 private void updateUser(HttpServletRequest request, HttpServletResponse response)
+						throws SQLException, ServletException, IOException, ParseException {
+				 
+				    daoUser.editUser(request, response);
+					request.setAttribute("users", daoUser.findAll());
+					forward(request, response, "/listAll.jsp");
+			 }
+			 
+			 	
 //			 public JSONObject getJson(String id) throws SQLException, JSONException, org.json.simple.parser.ParseException {
 //				 
 //		 
