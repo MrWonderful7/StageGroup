@@ -10,7 +10,7 @@ if (user == null) {
 %>
 <!DOCTYPE html>
 <html lang="en">
-<link href="TableStyle.css" rel="stylesheet" type="text/css">
+<link href="./CSS/TableStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
 

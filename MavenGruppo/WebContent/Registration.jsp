@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 
-<link href="RegStyle.css" rel="stylesheet" type="text/css">
+<link href="./CSS/RegStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
 <div class='internalBox'>

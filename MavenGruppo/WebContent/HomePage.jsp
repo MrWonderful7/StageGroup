@@ -12,7 +12,7 @@ if (user == null) {
 %>
 <!DOCTYPE html>
 <html>
-<link href="HomeStyle.css" rel="stylesheet" type="text/css">
+<link href="./CSS/HomeStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
 

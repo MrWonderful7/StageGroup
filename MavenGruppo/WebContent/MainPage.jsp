@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 
-<link href="signStyle.css" rel="stylesheet" type="text/css">
+<link href="./CSS/signStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
 <div class='internalBox'>
