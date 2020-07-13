@@ -6,7 +6,7 @@
 <%return;}%>
 <!DOCTYPE html>
 <html>
-<link href="AddStyle.css" rel="stylesheet" type="text/css">
+<link href="./CSS/AddStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
 

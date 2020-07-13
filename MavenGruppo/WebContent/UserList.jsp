@@ -10,7 +10,7 @@ if (user == null) {
 %>
 <!DOCTYPE html>
 <html lang="en">
-<link href="TableStyle.css" rel="stylesheet" type="text/css">
+<link href="./CSS/TableStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
 
@@ -58,11 +58,11 @@ if (user == null) {
 				<td class='block'>${product.birthDate}</td>
 				<td class='block'>${product.age}</td>
 				<td class='block'>${product.type}</td>
-				<td class='blocker'>${product.creationTimestamp}</td>
+				<td class='block'>${product.creationTimestamp}</td>
 				<td class='block'><a
-					href="Controller?op=edit&id=<c:out value='${stuff.id}' />">Edit</a></td>
+					href="ControllerServ?op=edit&opp=<c:out value='${product.id}' />">Edit</a></td>
 				<td class='block'><a
-					href="Controller?op=delete&id=<c:out value='${stuff.id}' />">Delete</a></td>
+					href="ControllerServ?op=delete&opp=<c:out value='${product.id}' />">Delete</a></td>
 
 
 			</tr>

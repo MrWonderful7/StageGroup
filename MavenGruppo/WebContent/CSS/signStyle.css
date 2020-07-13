@@ -34,9 +34,9 @@
 .buttonRow {
 	display: flex;
 	flex-direction: row;
-	justify-content: center;
+	justify-content: space-between;
 	align-items: center;
-	padding: 70px 0px 0px 0px;
+	padding: 12px 0px 0px 0px;
 }
 
 .submit {
@@ -51,6 +51,7 @@
 	height: 70px;
 	width: 140px;
 }
+
 
 .words {
 	font-size: 35px;

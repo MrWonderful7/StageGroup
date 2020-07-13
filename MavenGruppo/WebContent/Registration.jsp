@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 
-<link href="RegStyle.css" rel="stylesheet" type="text/css">
+<link href="./CSS/RegStyle.css" rel="stylesheet" type="text/css">
 <meta charset="ISO-8859-1">
 
 <div class='internalBox'>
@@ -12,6 +12,8 @@
              <input type=hidden name="op" value="register_submit">
 	
 		<div class='box'>
+		<div class='space'>
+		</div>
 			<div class='rowOne'>
 				<label class='words'>User Name</label>
 				<div class="myInput">
@@ -33,8 +35,7 @@
 					 <input type='password'  name="pass" class='restyle'></input>
 				</div>
 				<div class='buttonRow'>
-					  <button type="submit" value="register" name= "register_submit">
-					  </button>
+					<button class="submit" >Sign In</button>
 				</div>
 			</div>
 		</div>
