@@ -3,6 +3,7 @@ package TestPro;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,8 @@ import model.User;
 public class TestQuery {
 
 	private User user;
-	private String id ="02";
+	private String id ="21";
+	private Optional<User> user1;
 
 
 	@InjectMocks
@@ -46,9 +48,25 @@ public class TestQuery {
 		
 	
 		Mockito.when(mockCrud.save(user)).thenReturn(true);
+		System.out.println(user.toString());
 
 	}
 	
+	@Test
+	public void testFindById() throws SQLException, ParseException {
+		
 	
+		Mockito.when(mockCrud.find(id)).thenReturn(user1);
+
+	}
+	
+	@Test
+	public void testSelect() throws SQLException, ParseException {
+		
+	
+		Mockito.when(mockCrud.findIdForJson(id)).thenReturn(user);
+		
+
+	}
 
 }

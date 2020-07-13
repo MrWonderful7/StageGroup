@@ -113,6 +113,15 @@ public User() {}
 	public void setType(Type type) {
 		this.type = type;
 	}
+
+
+	@Override
+	public String toString() {
+		return   "Id: " + id + "\n" + "Name: " + name + "\n" +"Surname: " + surname + "\n" + "BirthDate: " + birthDate + "\n" + "Age: " + age + "\n" + "Type: " + type + "\n" +"Info: "
+				+ CreationTimestamp ;
+	}
+	
+	
 	
 
 	
