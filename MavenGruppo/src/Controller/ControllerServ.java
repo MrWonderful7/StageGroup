@@ -57,7 +57,7 @@ public class ControllerServ extends HttpServlet {
 
 			 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		HttpSession session = request.getSession();
 		String user = request.getParameter("username");
 	    String pass = request.getParameter("password");
@@ -211,12 +211,12 @@ public class ControllerServ extends HttpServlet {
 					JsonObject jsonObject= null;
 					jsonObject = new JsonParser().parse(jsonn).getAsJsonObject();
 					JSONObject JSONObject = new JSONObject(jsonObject.toString());
-					return JSONObject;
-				 }catch(JSONException e) {
-					 e.printStackTrace();
+						return JSONObject;
+				 			}catch(JSONException e) {
+				 				e.printStackTrace();
 				 	}
-				 return null;
-				 }
+				 		return null;
+				 		}
 			 
 
 			 public JSONObject getJsonByImportAllList(String id) throws SQLException, ParseException {
@@ -269,7 +269,8 @@ public class ControllerServ extends HttpServlet {
 					User newUser = new User(name, surname, date, age, type,timestamp);
 					daoUser.save(newUser);
 					
-					forward(request,response,"/HomePage.jsp");
+//					forward(request,response,"/HomePage.jsp");
+					response.sendRedirect("HomePage.jsp");
 	
 		
 	}
