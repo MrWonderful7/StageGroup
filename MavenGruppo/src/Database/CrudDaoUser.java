@@ -153,10 +153,11 @@ public class CrudDaoUser implements UserDao{
 	
 	public static boolean editUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ParseException {
 		
-		int id = Integer.parseInt( request.getParameter("id"));
+		
 		String name = request.getParameter("name");
+		int id = Integer.parseInt( request.getParameter("id"));
 		String surname = request.getParameter("surname");
-		String birth = request.getParameter("birth");
+		String birth = request.getParameter("birthDate");
 		String type = request.getParameter("role");
 		int age = Integer.parseInt(request.getParameter("age"));
 		
@@ -185,7 +186,7 @@ public class CrudDaoUser implements UserDao{
 
 		inserted = statement.executeUpdate() > 0;
 
-		conn.close();
+		
 		return inserted;
 		}
 
