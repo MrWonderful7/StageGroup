@@ -40,24 +40,24 @@
 
 		<div class='row'>
 			<label class='word'>Name</label> 
-			<input class='in' name="name"  placeholder="name"></input>
+			<input class='in' name="name"  placeholder="name"  value="${product.name}"></input>
 		</div>
 
 		<div class='row'>
 			<label class='word'>Surname</label> 
-			<input class='in'  name="surname" placeholder="surname"></input>
+			<input class='in'  name="surname" placeholder="surname" value="${product.surname}" ></input>
 		</div>
 		<div class='row'>
 			<label class='word'>BirthDate</label>
-			 <input class='in'  type="date" name="birthDate" placeholder="birthDate"></input>
+			 <input class='in'  type="date" name="birthDate" placeholder="birthDate" value="${product.birthDate}" ></input>
 		</div>
 		<div class='row'>
 			<label class='word'>Age</label> 
-			<input class='in' name="age" placeholder="age"></input>
+			<input class='in' name="age" placeholder="age" value="${product.age}" ></input>
 		</div>
 		<div class='row'>
 			<label class='word'>Role</label>
-			 <input class='in' name="role" placeholder="role"></input>
+			 <input class='in' name="role" placeholder="role" value="${product.type}" ></input>
 		</div>
 
 		<div class ='block'>

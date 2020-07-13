@@ -117,15 +117,15 @@ public class TestServ {
 	public void testParam() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 		
 		
-//	 when(request.getParameter("op")).thenReturn("insert");
-//	  new ControllerServ().doGet(request, response);
-//		
-		
-//		assertThat(controller).isNotNull();
+	
+
 		
 		 	HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 	        HttpServletResponse mockResponse = mock(HttpServletResponse.class);
 
+	        when(mockRequest.getParameter("op")).thenReturn("insert");
+	        
+	        
 	 
 	        when(mockRequest.getParameter("name")).thenReturn("admin");
 	        when(mockRequest.getParameter("surname")).thenReturn("test");
@@ -139,9 +139,9 @@ public class TestServ {
 	        JSONObject jsonn = new JSONObject();
 	        jsonn = cont.getJsonByImportAllList("1");
 	        JSONObject json = new JSONObject(); 
-	        json =  cont.getJson("1");
+	        json =  cont.getJson("53");
 	        System.out.println(json);
-	        JSONAssert.assertEquals("{name:\"aaaa\"}", json, false);
+	        JSONAssert.assertEquals("{name:\"Apple\"}", json, false);
 
 	}
 	
@@ -149,9 +149,9 @@ public class TestServ {
 	public void testJson() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 	
 		 JSONObject json = new JSONObject(); 
-	     json =  cont.getJson("2");
-	     JSONAssert.assertEquals("{name:\"Laurentiu\"}", json, false);
-	     JSONAssert.assertEquals("{role:\"OWNER\"}", json, false);
+	     json =  cont.getJson("53");
+	     JSONAssert.assertEquals("{name:\"Apple\"}", json, false);
+	     JSONAssert.assertEquals("{type:\"OWNER\"}", json, false);
 	}
 	
 	
@@ -162,7 +162,7 @@ public class TestServ {
 		  CrudDaoUser daoUser = CrudDaoUser.getInstance();
 		  daoUser.save(user);
 		  
-		  Optional<User> user2 = daoUser.find("2");
+		  Optional<User> user2 = daoUser.find("53");
 		  assertEquals(user2, user2);
 	    }
 	
