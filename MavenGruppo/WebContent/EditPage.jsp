@@ -36,8 +36,8 @@
 			<label class='words'>New User</label>
 		</div>
  			<form action="ControllerServ" method="POST" name="dati">
-            <input type=hidden name="op" value="insert">
-
+            <input type=hidden name="op" value="update">
+ <input type=hidden name="id"   value="${product.id}">
 		<div class='row'>
 			<label class='word'>Name</label> 
 			<input class='in' name="name"  placeholder="name"  value="${product.name}"></input>

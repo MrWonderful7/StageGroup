@@ -116,8 +116,14 @@ public class ControllerServ extends HttpServlet {
 			case"insert":
 				insertProduct(request, response);
 				break;
-			case "listUsers":
+			case"listUsers":
 				listUsers(request, response);
+				break;
+			case "update":
+				updateUser(request, response);
+				break;
+			case "delete":
+				deleteProduct(request, response);
 				break;
 				
 		
@@ -127,6 +133,20 @@ public class ControllerServ extends HttpServlet {
 	}
 		}
 			
+	
+	private void deleteProduct(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException{
+		
+		int id = Integer.parseInt(request.getParameter("opp"));
+		
+		User user = new User(id);
+		daoUser.delete(user);
+		forward(request,response,"/HomePage.jsp");
+		
+
+	}
+
+	
 	
 	
 			 private void listUsers(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException, JSONException, org.json.simple.parser.ParseException {
@@ -176,12 +196,22 @@ public class ControllerServ extends HttpServlet {
 					
 				
 					Optional<User> existingProduct = daoUser.find(id);
-					RequestDispatcher disp = request.getRequestDispatcher("/AddUser.jsp");
+//					RequestDispatcher disp = request.getRequestDispatcher("/AddUser.jsp");
 					existingProduct.ifPresent(s -> request.setAttribute("product", s));
-					disp.forward(request, response);
+					forward(request, response, "/EditPage.jsp");
 				}
 			 
 			 
+			 
+			 private void updateUser(HttpServletRequest request, HttpServletResponse response)
+						throws SQLException, ServletException, IOException, ParseException {
+				 
+				    daoUser.editUser(request, response);
+					request.setAttribute("product", daoUser.findAll());
+					forward(request, response, "/HomePage.jsp");
+			 }
+			 
+			 	
 //			 public JSONObject getJson(String id) throws SQLException, JSONException, org.json.simple.parser.ParseException {
 //				 
 //		 
@@ -269,8 +299,8 @@ public class ControllerServ extends HttpServlet {
 					User newUser = new User(name, surname, date, age, type,timestamp);
 					daoUser.save(newUser);
 					
-//					forward(request,response,"/HomePage.jsp");
-					response.sendRedirect("HomePage.jsp");
+			//	forward(request,response,"/HomePage.jsp");
+				response.sendRedirect("HomePage.jsp");
 	
 		
 	}

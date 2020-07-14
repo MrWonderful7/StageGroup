@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import java.time.LocalDateTime;  
 
 import model.Type;
@@ -137,12 +141,62 @@ public class CrudDaoUser implements UserDao{
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
 
 	@Override
 	public boolean delete(User o) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+
+		String sql = "DELETE FROM users WHERE id = ?";
+		boolean rowDeleted = false;
+		
+		Connection conn = DbConnect.getInstance().getConnection();
+			PreparedStatement stm = conn.prepareStatement(sql);
+			stm.setInt(1, o.getId());
+			rowDeleted = stm.executeUpdate() > 0;
+			
+		return rowDeleted;
 	}
+	
+	
+	public static boolean editUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ParseException {
+		
+		
+		String name = request.getParameter("name");
+		int id = Integer.parseInt( request.getParameter("id"));
+		String surname = request.getParameter("surname");
+		String birth = request.getParameter("birthDate");
+		String type = request.getParameter("role");
+		int age = Integer.parseInt(request.getParameter("age"));
+		
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		Date startDate = sdf.parse(birth);
+		final java.sql.Date sqlDate =  java.sql.Date.valueOf(birth);
+		return innerEditUser(id, name, surname, sqlDate, type, age);
+	}
+	
+
+
+		private static boolean innerEditUser(int id, String name, String surname, java.sql.Date birth, String type, int age)
+				throws SQLException {
+		
+			
+		boolean inserted=false;
+		String sql = "UPDATE users SET name = ?, surname = ?, birthdate = ?, age = ?, role = ? WHERE id = ?";
+		Connection conn = DbConnect.getInstance().getConnection();
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setString(1, name);
+		statement.setString(2, surname);
+		statement.setDate(3, birth);
+		statement.setInt(4, age);
+		statement.setString(5, type);
+		statement.setInt(6, id);
+
+		inserted = statement.executeUpdate() > 0;
+
+		
+		return inserted;
+		}
 
 	@Override
 	public User findIdForJson(String id) throws SQLException {
