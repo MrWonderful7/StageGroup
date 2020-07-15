@@ -116,10 +116,7 @@ public class TestServ {
 	@Test
 	public void testParam() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 		
-		
 	
-
-		
 		 	HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 	        HttpServletResponse mockResponse = mock(HttpServletResponse.class);
 
@@ -137,19 +134,21 @@ public class TestServ {
 	 
 	     
 	        JSONObject jsonn = new JSONObject();
-	        jsonn = cont.getJsonByImportAllList("1");
+	        jsonn = cont.getJsonByImportAllList("73");
 	        JSONObject json = new JSONObject(); 
-	        json =  cont.getJson("53");
+	        json =  cont.getJson("73");
 	        System.out.println(json);
-	        JSONAssert.assertEquals("{name:\"Apple\"}", json, false);
-
+	        JSONAssert.assertEquals("{name:\"Riccardo\"}", json, false);
+	       String json1 = jsonn.get("name").toString();
+			assertTrue("Riccardoo".equals(json1));
+	        
 	}
 	
 	@Test
 	public void testJson() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 	
 		 JSONObject json = new JSONObject(); 
-	     json =  cont.getJson("53");
+	     json =  cont.getJson("73");
 	     JSONAssert.assertEquals("{name:\"Apple\"}", json, false);
 	     JSONAssert.assertEquals("{type:\"OWNER\"}", json, false);
 	}
@@ -162,7 +161,7 @@ public class TestServ {
 		  CrudDaoUser daoUser = CrudDaoUser.getInstance();
 		  daoUser.save(user);
 		  
-		  Optional<User> user2 = daoUser.find("53");
+		  Optional<User> user2 = daoUser.find("73");
 		  assertEquals(user2, user2);
 	    }
 	
