@@ -154,7 +154,6 @@ public class ControllerServ extends HttpServlet {
 				session.invalidate();
 		    	forward(request,response,"/MainPage.jsp");
 				break;
-			
 			case"edit":
 				showEditForm(request, response);
 				break;

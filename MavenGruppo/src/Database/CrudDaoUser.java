@@ -69,7 +69,7 @@ public class CrudDaoUser implements UserDao{
 			listProducts.add(user);
 		}
 		
-		
+		conn.close();
 		return listProducts;
 	}
 
@@ -201,6 +201,47 @@ public class CrudDaoUser implements UserDao{
 		 return l;
 	}
 
+	
+	
+public static User searchUser(String s) throws SQLException, ServletException, IOException {
+		
+		int id = 0, age = 0;
+		String name = "", surname = "", roles = "";
+		java.sql.Timestamp info = null;
+		java.sql.Date sqlDate = null;
+
+		
+		Connection con =DbConnect.getInstance().getConnection();
+		  PreparedStatement ps=con.prepareStatement("select * from users where name=?");  
+		
+		  User user = null;
+		  ps.setString(1,s);
+		  ResultSet rs = ps.executeQuery();
+		  while(rs.next()) {
+			  
+			
+			  
+			  id = rs.getInt("id");
+				name = rs.getString("name");
+				surname = rs.getString("surname");
+				sqlDate = rs.getDate("birthdate");
+				age = rs.getInt("age");
+				roles = rs.getString("role");
+				info = rs.getTimestamp("info");
+			
+				Type type = Type.valueOf(roles);
+			 user = new User(id, name, sqlDate, surname, age, type);
+			 
+			
+			
+		  }
+		
+		 
+		  
+		 return user;
+	}
+	
+	
 
 	
 	public static boolean editUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ParseException {

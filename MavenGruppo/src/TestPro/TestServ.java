@@ -114,55 +114,59 @@ public class TestServ {
 	
 
 	@Test
-	public void testParam() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
+	public void testServlet() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 		
 	
 		 	HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 	        HttpServletResponse mockResponse = mock(HttpServletResponse.class);
-
-	        when(mockRequest.getParameter("op")).thenReturn("insert");
 	        
-	        
-	 
+	     
 	        when(mockRequest.getParameter("name")).thenReturn("admin");
 	        when(mockRequest.getParameter("surname")).thenReturn("test");
 	        when(mockRequest.getParameter("age")).thenReturn("30");
 	        when(mockRequest.getParameter("role")).thenReturn("OWNER");
-	        when(mockRequest.getParameter("birthDate")).thenReturn("01-01-2000");
+	        when(mockRequest.getParameter("birthDate")).thenReturn("1993-08-07");
+
 	        
 	        cont.insertProduct(mockRequest, mockResponse);
 	 
 	     
-	        JSONObject jsonn = new JSONObject();
-	        jsonn = cont.getJsonByImportAllList("73");
-	        JSONObject json = new JSONObject(); 
-	        json =  cont.getJson("73");
-	        System.out.println(json);
-	        JSONAssert.assertEquals("{name:\"Riccardo\"}", json, false);
-	       String json1 = jsonn.get("name").toString();
-			assertTrue("Riccardoo".equals(json1));
+	      
+			
 	        
 	}
 	
 	@Test
 	public void testJson() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 	
-		 JSONObject json = new JSONObject(); 
-	     json =  cont.getJson("73");
-	     JSONAssert.assertEquals("{name:\"Apple\"}", json, false);
-	     JSONAssert.assertEquals("{type:\"OWNER\"}", json, false);
+
+	     	JSONObject jsonn = new JSONObject();
+	        jsonn = cont.getJsonByImportAllList("73");
+	        JSONObject json = new JSONObject(); 
+	        json =  cont.getJson("73");
+	        System.out.println(json);
+	        JSONAssert.assertEquals("{name:\"Riccardo\"}", json, false);
+	        String json1 = jsonn.get("name").toString();
+			assertTrue("Riccardo".equals(json1));
 	}
 	
 	
 	
 	 @Test
-	    public void createUser() throws SQLException, ParseException {
+	    public void saveUserAndVerifyIfYouHave() throws SQLException, ParseException, ServletException, IOException {
 	       
-		  CrudDaoUser daoUser = CrudDaoUser.getInstance();
-		  daoUser.save(user);
-		  
-		  Optional<User> user2 = daoUser.find("73");
-		  assertEquals(user2, user2);
+		CrudDaoUser daoUser = CrudDaoUser.getInstance();
+		
+		boolean verify =  daoUser.save(user);
+		assertTrue(verify);
+		 
+		User user2 = new User();
+		user2 = daoUser.searchUser("Johnny");
+
+		assertEquals(user.getName(), user2.getName());
+		
+		
+		
 	    }
 	
 	
