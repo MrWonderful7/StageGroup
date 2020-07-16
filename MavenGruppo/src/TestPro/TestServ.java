@@ -1,46 +1,28 @@
 package TestPro;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
-
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import org.junit.Assert;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.skyscreamer.jsonassert.JSONAssert;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
 import Controller.ControllerServ;
 import Database.CrudDaoUser;
 import Database.DbConnect;
@@ -116,17 +98,11 @@ public class TestServ {
 	@Test
 	public void testParam() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 		
-		
 	
-
-		
 		 	HttpServletRequest mockRequest = mock(HttpServletRequest.class);
 	        HttpServletResponse mockResponse = mock(HttpServletResponse.class);
 
 	        when(mockRequest.getParameter("op")).thenReturn("insert");
-	        
-	        
-	 
 	        when(mockRequest.getParameter("name")).thenReturn("admin");
 	        when(mockRequest.getParameter("surname")).thenReturn("test");
 	        when(mockRequest.getParameter("age")).thenReturn("30");
@@ -137,19 +113,21 @@ public class TestServ {
 	 
 	     
 	        JSONObject jsonn = new JSONObject();
-	        jsonn = cont.getJsonByImportAllList("1");
+	        jsonn = cont.getJsonByImportAllList("73");
 	        JSONObject json = new JSONObject(); 
-	        json =  cont.getJson("53");
+	        json =  cont.getJson("73");
 	        System.out.println(json);
-	        JSONAssert.assertEquals("{name:\"Apple\"}", json, false);
-
+	        JSONAssert.assertEquals("{name:\"Riccardo\"}", json, false);
+	       String json1 = jsonn.get("name").toString();
+			assertTrue("Riccardoo".equals(json1));
+	        
 	}
 	
 	@Test
 	public void testJson() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 	
 		 JSONObject json = new JSONObject(); 
-	     json =  cont.getJson("53");
+	     json =  cont.getJson("73");
 	     JSONAssert.assertEquals("{name:\"Apple\"}", json, false);
 	     JSONAssert.assertEquals("{type:\"OWNER\"}", json, false);
 	}
@@ -162,7 +140,7 @@ public class TestServ {
 		  CrudDaoUser daoUser = CrudDaoUser.getInstance();
 		  daoUser.save(user);
 		  
-		  Optional<User> user2 = daoUser.find("53");
+		  Optional<User> user2 = daoUser.find("73");
 		  assertEquals(user2, user2);
 	    }
 	

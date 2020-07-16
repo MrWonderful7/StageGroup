@@ -8,6 +8,6 @@
  
     <h:body>
         <p:spinner />
-        <p:message/>W LA MONA
+        <p:message/>Message
     </h:body>
 </html>

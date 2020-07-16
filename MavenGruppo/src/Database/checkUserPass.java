@@ -12,7 +12,9 @@ import org.mindrot.jbcrypt.BCrypt;
 public class checkUserPass {
 
 	
-	public static boolean insertUser(String username, String password, String email) {
+	private static Connection conn; 
+	
+	public static boolean insertUser(String username, String password, String email) throws SQLException {
 		
 		try {
 			String hashed="";
@@ -23,8 +25,9 @@ public class checkUserPass {
 				 System.out.println(e);
 				 System.out.println("problem in Bcrypt");
 			 }
-			Connection conn = DbConnect.getInstance().getConnection();
+			
 			String query = "insert into webaccount values (?,?,?)";
+			conn= DbConnect.getInstance().getConnection();
 			PreparedStatement psm = conn.prepareStatement(query);
 			psm.setString(1, username);
 			psm.setString(2, hashed);
@@ -37,6 +40,9 @@ public class checkUserPass {
 			
 		}catch(Exception ex) {
 			System.out.println("We have a problem...");
+		}
+		finally {
+			conn.close();
 		}
 	
 		return false;

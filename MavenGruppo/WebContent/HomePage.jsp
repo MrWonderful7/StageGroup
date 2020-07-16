@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String user = (String) session.getAttribute("user");
 if (user == null) {
@@ -47,8 +47,42 @@ if (user == null) {
 
 </div>
 
+<div> 
+<form action="ControllerServ" method="post">
+                            <span class="icon"><i class="fa fa-search"></i></span>
+                              <input type=hidden name="op" value="search">
+                            <input type="search" id="search" name="search" placeholder="Search"/>
+                        </form>
+ 
+
+</div>
 
 
+<div>
+
+
+       <table class='t'>
+            <thead>
+            <tr class="bg-success">
+             
+                <th>Name</th>
+                <th>Description</th>
+            
+            </tr>
+            </thead>
+            <c:forEach items="${userr}" var="product">
+                <tr>
+                    
+                    <td>${product.id}</td>
+                    <td>${product.surname}</td>
+                   
+                    
+                    
+                   
+                </tr>
+            </c:forEach>
+        </table>
+</div>
 
 
 

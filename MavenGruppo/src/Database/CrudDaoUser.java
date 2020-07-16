@@ -1,6 +1,7 @@
 package Database;
 
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +16,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -158,6 +161,47 @@ public class CrudDaoUser implements UserDao{
 		return rowDeleted;
 	}
 	
+	
+	public static List<User> search(String s) throws SQLException, ServletException, IOException {
+		
+		int id = 0, age = 0;
+		String name = "", surname = "", roles = "";
+		java.sql.Timestamp info = null;
+		java.sql.Date sqlDate = null;
+
+		
+		 List<User> l = new ArrayList<User>();
+		Connection con =DbConnect.getInstance().getConnection();
+		  PreparedStatement ps=con.prepareStatement("select * from users where name=?");  
+		
+		
+		  ps.setString(1,s);
+		  ResultSet rs = ps.executeQuery();
+		  while(rs.next()) {
+			  
+			
+			  
+			  id = rs.getInt("id");
+				name = rs.getString("name");
+				surname = rs.getString("surname");
+				sqlDate = rs.getDate("birthdate");
+				age = rs.getInt("age");
+				roles = rs.getString("role");
+				info = rs.getTimestamp("info");
+			
+				Type type = Type.valueOf(roles);
+			 User user = new User(id, name, sqlDate, surname, age, type);
+			 
+			  l.add(user);
+			
+		  }
+		
+		 
+		  
+		 return l;
+	}
+
+
 	
 	public static boolean editUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ParseException {
 		

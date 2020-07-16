@@ -37,6 +37,17 @@ public class User {
 		this.CreationTimestamp=CreationTimestamp;
 		
 	}
+	
+	public User(int id, String name, Date birthDate,String surname, int age, Type type) {
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.birthDate = birthDate;
+		this.age = age;
+		this.type = type;
+		
+		
+	}
 
 
 	public User(String name, String surname, Date birthDate, int age,  Type type,Timestamp CreationTimestamp) {
@@ -58,6 +69,12 @@ public User() {}
 	}
 
 	
+	public User(int id2, String name2) {
+		this.id = id2;
+		this.name = name2;
+	}
+
+
 	public String getName() {
 		return name;
 	}
