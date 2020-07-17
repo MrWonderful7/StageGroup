@@ -9,7 +9,6 @@ public class DbConnect {
 
 	  private static DbConnect instance;
 	  
-	    private Connection connection;
 	    private String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	    private String username = "LORENZO";
 	    private String password = "0000";
@@ -17,19 +16,28 @@ public class DbConnect {
 	  private  DbConnect() throws SQLException {
 	        try {
 	            Class.forName("oracle.jdbc.driver.OracleDriver");
-	            this.connection = DriverManager.getConnection(url, username, password);
-	            
+	        
 	        } catch (ClassNotFoundException ex) {
 	            System.out.println("Database Connection Creation Failed : " + ex.getMessage());
 	        }
 	    }
 
-	    public Connection getConnection() {
-	        return connection;
+	    public Connection getConnection() throws SQLException {
+	        return DriverManager.getConnection(url, username, password);
 	    }
-
-
 	    
+	    public static void closeConnection(Connection connection)
+	    {
+	        try {
+	            if (connection != null) {
+	                connection.close();
+	                connection=null;
+	            }
+	        } catch (SQLException e) {
+	           System.out.println(e.getMessage());
+	        }
+	    }
+	   
 	    public static DbConnect getInstance() throws SQLException {
 	        if (instance == null) {
 	            instance = new DbConnect();

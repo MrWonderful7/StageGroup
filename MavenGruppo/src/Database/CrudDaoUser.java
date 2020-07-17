@@ -56,12 +56,9 @@ public class CrudDaoUser implements UserDao {
 				Type role = Type.valueOf(type);
 				java.sql.Timestamp ts = resultSet.getTimestamp("info");
 				String id = resultSet.getString("id");
-
 				int idInt = Integer.parseInt(id);
-
 				User user = new User(idInt, name, birthDate, surname, age, role, ts);
 				listProducts.add(user);
-
 			}
 
 		} catch (SQLException e) {
@@ -70,7 +67,7 @@ public class CrudDaoUser implements UserDao {
 
 		} finally {
 
-			conn.close();
+			DbConnect.closeConnection(conn);
 		}
 
 		return listProducts;
@@ -82,13 +79,12 @@ public class CrudDaoUser implements UserDao {
 
 		boolean rowInserted = false;
 		Connection conn = null;
+		String sql = "INSERT into users (name, surname, birthDate, age, role, info)VALUES(?,?,?,?,?,?)";
+		PreparedStatement stm = conn.prepareStatement(sql);
 
 		try {
 
-			String sql = "INSERT into users (name, surname, birthDate, age, role, info)VALUES(?,?,?,?,?,?)";
-
 			conn = DbConnect.getInstance().getConnection();
-			PreparedStatement stm = conn.prepareStatement(sql);
 			java.util.Date utilDate = user.getBirthDate();
 			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			final String stringDate = dateFormat.format(utilDate);
@@ -107,9 +103,10 @@ public class CrudDaoUser implements UserDao {
 			rowInserted = stm.executeUpdate() > 0;
 
 		} finally {
-			conn.close();
-		}
 
+			DbConnect.closeConnection(conn);
+
+		}
 		return rowInserted;
 	}
 
@@ -122,34 +119,36 @@ public class CrudDaoUser implements UserDao {
 		java.sql.Timestamp info = null;
 		java.sql.Date sqlDate = null;
 		Connection conn = null;
+		Type type = Type.valueOf(roles);
+		PreparedStatement stm = null;
+		ResultSet resultSet = null;
 
-		try {
+		if (conn == null) {
+			try {
 
-			conn = DbConnect.getInstance().getConnection();
+				conn = DbConnect.getInstance().getConnection();
+				stm = conn.prepareStatement(sql);
+				stm.setString(1, id);
+				resultSet = stm.executeQuery();
+//				java.util.Date utilDate = null;
+//				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//				final String stringDate= dateFormat.format(utilDate);
+//				final java.sql.Date sqlDate=  java.sql.Date.valueOf(stringDate);
 
-//			java.util.Date utilDate = null;
-//			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//			final String stringDate= dateFormat.format(utilDate);
-//			final java.sql.Date sqlDate=  java.sql.Date.valueOf(stringDate);
+				if (resultSet.next()) {
+					idd = resultSet.getInt("id");
+					name = resultSet.getString("name");
+					surname = resultSet.getString("surname");
+					sqlDate = resultSet.getDate("birthdate");
+					age = resultSet.getInt("age");
+					roles = resultSet.getString("role");
+					info = resultSet.getTimestamp("info");
+				}
 
-			PreparedStatement stm = conn.prepareStatement(sql);
-			stm.setString(1, id);
-			ResultSet resultSet = stm.executeQuery();
+			} finally {
 
-			if (resultSet.next()) {
-				idd = resultSet.getInt("id");
-				name = resultSet.getString("name");
-				surname = resultSet.getString("surname");
-				sqlDate = resultSet.getDate("birthdate");
-				age = resultSet.getInt("age");
-				roles = resultSet.getString("role");
-				info = resultSet.getTimestamp("info");
+				DbConnect.closeConnection(conn);
 			}
-			Type type = Type.valueOf(roles);
-
-		} finally {
-
-			conn.close();
 		}
 
 		return Optional.of(new User(name, surname, sqlDate, info, age, idd, type));
@@ -176,7 +175,7 @@ public class CrudDaoUser implements UserDao {
 			rowDeleted = stm.executeUpdate() > 0;
 		} finally {
 
-			conn.close();
+			DbConnect.closeConnection(conn);
 		}
 
 		return rowDeleted;
@@ -223,6 +222,7 @@ public class CrudDaoUser implements UserDao {
 		java.sql.Date sqlDate = null;
 		Connection conn = null;
 		User user = null;
+		DbConnect.getInstance().getConnection();
 
 		try {
 			conn = DbConnect.getInstance().getConnection();
@@ -247,7 +247,7 @@ public class CrudDaoUser implements UserDao {
 
 		} finally {
 
-			conn.close();
+			DbConnect.closeConnection(conn);
 		}
 
 		return user;
@@ -274,8 +274,9 @@ public class CrudDaoUser implements UserDao {
 
 		boolean inserted = false;
 		String sql = "UPDATE users SET name = ?, surname = ?, birthdate = ?, age = ?, role = ? WHERE id = ?";
-		Connection conn=null;
-		
+		Connection conn = null;
+		DbConnect.getInstance().getConnection();
+
 		try {
 			conn = DbConnect.getInstance().getConnection();
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -287,10 +288,10 @@ public class CrudDaoUser implements UserDao {
 			statement.setInt(6, id);
 
 			inserted = statement.executeUpdate() > 0;
-		}finally {
-			conn.close();
+		} finally {
+			DbConnect.closeConnection(conn);
 		}
-		
+
 		return inserted;
 	}
 
@@ -304,39 +305,38 @@ public class CrudDaoUser implements UserDao {
 		java.sql.Date sqlDate = null;
 		Connection conn = null;
 		User user;
-		
+		DbConnect.getInstance().getConnection();
+
 		try {
-			 conn = DbConnect.getInstance().getConnection();
+			conn = DbConnect.getInstance().getConnection();
 
 //				java.util.Date utilDate = null;
 //				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //				final String stringDate= dateFormat.format(utilDate);
 //				final java.sql.Date sqlDate=  java.sql.Date.valueOf(stringDate);
 
-				PreparedStatement stm = conn.prepareStatement(sql);
-				stm.setString(1, id);
-				ResultSet resultSet = stm.executeQuery();
+			PreparedStatement stm = conn.prepareStatement(sql);
+			stm.setString(1, id);
+			ResultSet resultSet = stm.executeQuery();
 
-				if (resultSet.next()) {
-					idd = resultSet.getInt("id");
-					name = resultSet.getString("name");
-					surname = resultSet.getString("surname");
-					sqlDate = resultSet.getDate("birthdate");
-					age = resultSet.getInt("age");
-					roles = resultSet.getString("role");
-					info = resultSet.getTimestamp("info");
-				}
-				
-				Type type = Type.valueOf(roles);
-			    user = new User(name, surname, sqlDate, info, age, idd, type);
+			if (resultSet.next()) {
+				idd = resultSet.getInt("id");
+				name = resultSet.getString("name");
+				surname = resultSet.getString("surname");
+				sqlDate = resultSet.getDate("birthdate");
+				age = resultSet.getInt("age");
+				roles = resultSet.getString("role");
+				info = resultSet.getTimestamp("info");
+			}
 
-			
-		}finally {
-			
-			conn.close();
+			Type type = Type.valueOf(roles);
+			user = new User(name, surname, sqlDate, info, age, idd, type);
+
+		} finally {
+
+			DbConnect.closeConnection(conn);
 		}
 
-	
 		return user;
 	}
 

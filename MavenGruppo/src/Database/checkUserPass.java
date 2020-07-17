@@ -15,6 +15,7 @@ public class checkUserPass {
 	private static Connection conn; 
 	
 	public static boolean insertUser(String username, String password, String email) throws SQLException {
+		DbConnect.getInstance().getConnection();
 		
 		try {
 			String hashed="";
@@ -42,17 +43,18 @@ public class checkUserPass {
 			System.out.println("We have a problem...");
 		}
 		finally {
-			conn.close();
+			DbConnect.closeConnection(conn);
 		}
 	
 		return false;
 	}
 	
 	
-	public static String returnPass(String user) {
+	public static String returnPass(String user) throws SQLException {
 		
 	String query = "select password from webaccount where username=?";
 	String pass = "";
+	DbConnect.getInstance().getConnection();
 		
 		try {
 			Connection conn = DbConnect.getInstance().getConnection();
@@ -75,6 +77,7 @@ public class checkUserPass {
 		
 	public static boolean login(String user, String pass) {
 		
+		
 		try {
 			
 		String passDbHash =	checkUserPass.returnPass(user);
@@ -93,9 +96,10 @@ public class checkUserPass {
 		return false;
 	}
 	
-	public static boolean userExist(String user) {
+	public static boolean userExist(String user) throws SQLException {
 		
 		String query = "select username from webaccount";
+		DbConnect.getInstance().getConnection();
 		
 		try {
 			Connection conn = DbConnect.getInstance().getConnection();
