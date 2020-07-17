@@ -91,10 +91,6 @@ public class TestServ {
 			 
 	    }
 	
-
-	 
-	
-
 	@Test
 	public void testServlet() throws IOException, ServletException, SQLException, ParseException, JSONException, org.json.simple.parser.ParseException {
 		
@@ -115,10 +111,6 @@ public class TestServ {
 
 	        
 	        cont.insertProduct(mockRequest, mockResponse);
-	 
-	     
-	      
-			
 	        
 	}
 	
